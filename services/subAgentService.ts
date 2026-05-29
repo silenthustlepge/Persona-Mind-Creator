@@ -4,7 +4,7 @@ import { enqueueGeminiRequest } from './apiQueue';
 
 let ai: GoogleGenAI;
 try {
-  ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+  ai = new GoogleGenAI({ apiKey: "dummy_client_key_as_requests_are_proxied" });
 } catch(e) {
   console.error("Failed to initialize GoogleGenAI for Sub-agent Service. Make sure API_KEY is set.", e);
 }

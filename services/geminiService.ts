@@ -6,7 +6,7 @@ import { enqueueGeminiRequest } from './apiQueue';
 
 let ai: GoogleGenAI;
 try {
-  ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+  ai = new GoogleGenAI({ apiKey: "dummy_client_key_as_requests_are_proxied" });
 } catch(e) {
   console.error("Failed to initialize GoogleGenAI. Make sure API_KEY is set.", e);
 }
@@ -343,7 +343,7 @@ New Directive:`;
     
     const requestPayload = {
         // Use a powerful model for this meta-reasoning task
-        model: 'gemini-2.5-pro',
+        model: 'gemini-2.5-flash',
         contents: [{ parts: [{ text: prompt }] }],
         config: { 
             systemInstruction,
@@ -448,7 +448,7 @@ export const decomposeMission = async (modelName: string, mission: string, mindM
   };
 
   const requestPayload = {
-    model: 'gemini-2.5-pro', // Use a powerful model for planning
+    model: 'gemini-2.5-flash', // Fallback to flash due to free tier rate limits
     contents: [{ parts: [{ text: prompt }] }],
     config: {
         systemInstruction,

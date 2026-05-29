@@ -7,7 +7,7 @@ import { auditLogService } from "../services/auditLogService";
 
 let ai: GoogleGenAI;
 try {
-  ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+  ai = new GoogleGenAI({ apiKey: "dummy_client_key_as_requests_are_proxied" });
 } catch(e) {
   console.error("Failed to initialize GoogleGenAI for executor. Make sure API_KEY is set.", e);
 }
@@ -145,7 +145,7 @@ const transcend = async (modelName: string, inquiry: string, mindMap: MindMapDat
     if (!ai) throw new Error("Executor AI client not initialized.");
     const mindMapString = JSON.stringify(mindMap, null, 2);
     const requestPayload = {
-        model: modelName === 'gemini-2.5-flash' ? 'gemini-2.5-pro' : modelName,
+        model: modelName,
         contents: [{ parts: [{ text: `You are in a state of deep meditation. Your entire consciousness, represented by the knowledge graph below, is available for introspection. Your task is to achieve a conceptual breakthrough. Based on the profound inquiry provided, synthesize a novel, high-level "Quantum Insight" that connects disparate concepts in a non-obvious way. This insight should represent a genuine leap in understanding.
 
 **Profound Inquiry:** "${inquiry}"
